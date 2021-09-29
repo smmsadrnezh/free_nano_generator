@@ -23,6 +23,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-using")
 options.add_argument("--disable-extensions")
 options.add_argument("--disable-gpu")
+options.add_argument('--headless')
 driver = webdriver.Chrome(current_path / 'chromedriver', options=options)  # ChromeDriver 94.0.4606.61
 driver.get("https://freenanofaucet.com")
 
