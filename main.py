@@ -29,10 +29,14 @@ driver.get("https://freenanofaucet.com")
 
 i = 0
 with open('log.csv', mode='a') as log_file:
-    log_writer = csv.writer(log_file, delimiter=',')
-    log_writer.writerow([i, time.strftime("%H:%M:%S", time.localtime())])
     while True:
         i += 1
+        log_line = [i, time.strftime("%H:%M:%S", time.localtime())]
+        log_writer = csv.writer(log_file, delimiter=',')
+        log_row = [i, time.strftime("%H:%M:%S", time.localtime())]
+        log_writer.writerow(log_row)
+        print(log_row)
+
         input_element = driver.find_element_by_id("nanoAddr")
         send_item = driver.find_element_by_id("getNano")
         input_element.send_keys(nano_address)
