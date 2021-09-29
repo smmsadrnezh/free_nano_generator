@@ -24,12 +24,15 @@ from settings import url, file_name, refresh_rate, nano_address
 def initiate_chrome_driver():
     options = Options()
     options.add_argument("--no-sandbox")
+    options.add_argument('--ignore-certificate-errors')
     options.add_argument("--disable-dev-shm-using")
+    options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
     options.add_argument('--headless')
     options.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), options=options)
+    # driver = webdriver.Chrome('chromedriver')
     driver.get(url)
     return driver
 
@@ -39,6 +42,7 @@ def make_nano(driver):
     send_item = driver.find_element_by_id("getNano")
     input_element.send_keys(nano_address)
     send_item.click()
+    time.sleep(5)
     return driver.page_source
 
 
