@@ -12,6 +12,7 @@ import time
 import pathlib
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 nano_address = "nano_1d8xhr8tj56ee6xhynt3k3jqecetpdznyibx9f531w5pf7rj9oqjkrnxq48t"
 refresh_rate = 15 * 60
@@ -25,7 +26,7 @@ options.add_argument("--disable-extensions")
 options.add_argument("--disable-gpu")
 options.add_argument('--headless')
 options.add_argument("--remote-debugging-port=9222")
-driver = webdriver.Chrome(current_path / 'chromedriver', options=options)  # ChromeDriver 94.0.4606.61
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)  # ChromeDriver 94.0.4606.61
 driver.get("https://freenanofaucet.com")
 
 i = 0
