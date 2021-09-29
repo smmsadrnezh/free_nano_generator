@@ -12,6 +12,7 @@ apt install -y libglib2.0-0 libnss3 libgconf-2-4 libfontconfig1
 
 import csv
 import time
+import pathlib
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -22,17 +23,18 @@ from settings import url, file_name, refresh_rate, nano_address
 
 
 def initiate_chrome_driver():
-    options = Options()
-    options.add_argument("--no-sandbox")
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument("--disable-dev-shm-using")
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-gpu")
-    options.add_argument('--headless')
-    options.add_argument("--remote-debugging-port=9222")
-    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), options=options)
-    # driver = webdriver.Chrome('chromedriver')
+    # options = Options()
+    # options.add_argument("--no-sandbox")
+    # options.add_argument('--ignore-certificate-errors')
+    # options.add_argument("--disable-dev-shm-using")
+    # options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument("--disable-extensions")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument('--headless')
+    # options.add_argument("--remote-debugging-port=9222")
+    # driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(), options=options)
+    current_path = pathlib.Path(__file__).parent.resolve()
+    driver = webdriver.Chrome(current_path / 'chromedriver')
     driver.get(url)
     return driver
 
@@ -57,9 +59,7 @@ def write_logs(html_source):
 
 
 if __name__ == '__main__':
-
     driver = initiate_chrome_driver()
-
     while True:
         html_source = make_nano(driver)
         write_logs(html_source)
