@@ -7,7 +7,7 @@ nano_address = "nano_1d8xhr8tj56ee6xhynt3k3jqecetpdznyibx9f531w5pf7rj9oqjkrnxq48
 refresh_rate = 15 * 60
 
 current_path = pathlib.Path(__file__).parent.resolve()
-driver = webdriver.Chrome(current_path / 'chromedriver')
+driver = webdriver.Chrome(current_path / 'chromedriver')  # ChromeDriver 94.0.4606.61
 driver.get("https://freenanofaucet.com")
 
 i = 0
